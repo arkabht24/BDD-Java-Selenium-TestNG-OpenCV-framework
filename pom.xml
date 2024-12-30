@@ -14,13 +14,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
+   <!-- <repositories>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-
+-->
 
     <dependencies>
         <!-- Selenium -->
@@ -64,11 +64,7 @@
         </dependency>
 
         <!-- Extent Reports -->
-        <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extent-cucumber7-adapter</artifactId>
-            <version>2.10.1</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.aventstack</groupId>
