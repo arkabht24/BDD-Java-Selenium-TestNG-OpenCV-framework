@@ -34,7 +34,12 @@ def compare_images_with_contours(image_path1, image_path2, output_path):
     print(f"Differences highlighted and saved to: {output_path}")
 
 # Example usage
-image1 = "/Users/arkabhattacharyya/Documents/Java Projects/orange-hrm-test-automation/resources/Image1.png"
-image2 = "/Users/arkabhattacharyya/Documents/Java Projects/orange-hrm-test-automation/resources/Image2.png"
+# image1 = "/Users/arkabhattacharyya/Documents/Java Projects/orange-hrm-test-automation/resources/Image1.png"
+# image2 = "/Users/arkabhattacharyya/Documents/Java Projects/orange-hrm-test-automation/resources/Image2.png"
+
+image1 = str(input())
+image2 = str(input())
 output_image = "/Users/arkabhattacharyya/Documents/Java Projects/orange-hrm-test-automation/resources/Image3.png"
+
+
 compare_images_with_contours(image1,image2,output_image)
