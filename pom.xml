@@ -14,13 +14,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-   <!-- <repositories>
+    <!--<repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>appium-repo</id>
+            <url>https://appium.github.io/java-client/</url>
         </repository>
-    </repositories>
--->
+    </repositories>-->
+
+    <!-- <repositories>
+         <repository>
+             <id>jitpack.io</id>
+             <url>https://jitpack.io</url>
+         </repository>
+     </repositories>
+ -->
 
     <dependencies>
         <!-- Selenium -->
@@ -29,6 +36,15 @@
             <artifactId>selenium-java</artifactId>
             <version>4.14.0</version>
         </dependency>
+
+        <!-- Appium Java Client -->
+        <!--<dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>9.4.0</version> &lt;!&ndash; Or the latest version &ndash;&gt;
+        </dependency>
+-->
+
 
         <!-- Cucumber -->
         <dependency>

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class WebDriverUtil {
     public static WebDriver getDriver(String browser) {
         WebDriver driver = null;
@@ -12,6 +14,8 @@ public class WebDriverUtil {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/resources/Drivers/chromedriver");
                 driver = new ChromeDriver();
+                driver.manage().window().maximize();
+                driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
                 break;
 
             case "firefox":

@@ -6,6 +6,8 @@
     </listeners>
     <test  name="Cucumber with TestNG Test">
         <parameter name="browser" value="chrome"/>
+        <parameter name = "screenshot-comparison" value="false"/>
+        <parameter name="cucumber.filter.tags" value="@PrintScenario3"/>
         <classes>
             <class name="com.orangehrm.runners.RunnerTestFeatureOne">
             </class>

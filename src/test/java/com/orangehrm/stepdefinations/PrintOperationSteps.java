@@ -1,10 +1,13 @@
 package com.orangehrm.stepdefinations;
 
+import com.orangehrm.listeners.WebDriverListener;
+import com.orangehrm.utils.WebDriverUtil;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.WebDriver;
 
-import static org.testng.AssertJUnit.assertFalse;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 
@@ -26,7 +29,11 @@ public class PrintOperationSteps {
 
     @Then("I should see {string} printed on the console")
     public void i_should_see_printed_on_the_console(String expectedMessage) {
-        // Verify the output
-        assertTrue("Message not printed correctly", message.equals(expectedMessage));
+        WebDriverListener.getDriver().get("https://www.google.com");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

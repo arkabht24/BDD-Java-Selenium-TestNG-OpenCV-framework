@@ -1,11 +1,17 @@
 package com.orangehrm.hooks;
 
 import com.aventstack.extentreports.Status;
+import com.orangehrm.listeners.TestNGParameterStore;
+import com.orangehrm.utils.FileUtils;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
+import static com.orangehrm.listeners.WebDriverListener.testName;
+
+
 public class ExtentReportHooks {
+
     @Before
     public void beforeScenario(Scenario scenario) {
         // Start a new test for each scenario
@@ -13,6 +19,16 @@ public class ExtentReportHooks {
                 ExtentReportManager.getReporter().createTest(scenario.getName())
         );
         ExtentReportManager.getTest().log(Status.INFO, "Starting Scenario: " + scenario.getName());
+        testName.set(scenario.getName());
+        if(TestNGParameterStore.getParameter("screenshot-comparison").equalsIgnoreCase("false")){
+            new FileUtils().deleteDirectory("resources/baselineSS/"+testName.get());
+            new FileUtils().createDirectoryIfNotExists("resources/baselineSS/"+testName.get());
+        }
+        else {
+            new FileUtils().deleteDirectory("resources/temporarySS/"+testName.get());
+            new FileUtils().createDirectoryIfNotExists("resources/temporarySS"+testName.get());
+        }
+
     }
 
     @After

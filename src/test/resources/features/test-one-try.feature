@@ -14,7 +14,7 @@ Feature: Print operation test
     Then I should see "Hello, Cucumber!" printed on the console
 
   @PrintScenario3
-  Scenario: Print a simple message to verify setup 1
+  Scenario: Print a simple message to verify setup 2
     Given I have a simple print operation
     When I execute the print operation
     Then I should see "Hello, Cucumber!" printed on the console

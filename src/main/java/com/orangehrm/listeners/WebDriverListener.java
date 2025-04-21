@@ -1,6 +1,7 @@
 package com.orangehrm.listeners;
 
 
+import com.orangehrm.utils.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -9,8 +10,17 @@ import com.orangehrm.utils.WebDriverUtil;
 
 public class WebDriverListener implements ITestListener {
 
-    private WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public static ThreadLocal<String> testName = new ThreadLocal<>();
     private String browser;
+
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
+
+    public static void setDriver(WebDriver webDriver) {
+        driver.set(webDriver);
+    }
 
     @Override
     public void onStart(ITestContext context) {
@@ -24,37 +34,40 @@ public class WebDriverListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        driver = WebDriverUtil.getDriver(browser);
+        setDriver(WebDriverUtil.getDriver(browser));
         System.out.println("Browser initialized: " + browser);
+
+        result.getTestContext().getCurrentXmlTest().getAllParameters().forEach(TestNGParameterStore::setParameter);
+
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         System.out.println("Test passed: " + result.getName());
-        tearDown();
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         System.out.println("Test failed: " + result.getName());
-        tearDown();
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         System.out.println("Test skipped: " + result.getName());
-        tearDown();
     }
 
     public void tearDown(){
         try {
-            if (driver != null) {
-                driver.quit();
+            WebDriver webDriver = getDriver();
+            if (webDriver != null) {
+                webDriver.quit();
                 System.out.println("Browser closed.");
             }
-        }
-        catch (Exception e){
-            System.out.println("Browser closed already.");
+        } catch (Exception e) {
+            System.out.println("Browser already closed or error occurred: " + e.getMessage());
+        } finally {
+            driver.remove();
+            testName.remove();
         }
     }
 }
