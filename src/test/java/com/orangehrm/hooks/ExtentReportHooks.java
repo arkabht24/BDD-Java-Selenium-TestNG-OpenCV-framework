@@ -3,10 +3,12 @@ package com.orangehrm.hooks;
 import com.aventstack.extentreports.Status;
 import com.orangehrm.listeners.TestNGParameterStore;
 import com.orangehrm.utils.FileUtils;
+import com.orangehrm.utils.WebDriverUtil;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
+import static com.orangehrm.listeners.WebDriverListener.setDriver;
 import static com.orangehrm.listeners.WebDriverListener.testName;
 
 
@@ -19,6 +21,9 @@ public class ExtentReportHooks {
                 ExtentReportManager.getReporter().createTest(scenario.getName())
         );
         ExtentReportManager.getTest().log(Status.INFO, "Starting Scenario: " + scenario.getName());
+        String browser = TestNGParameterStore.getParameter("browser");
+        setDriver(WebDriverUtil.getDriver(browser));
+        System.out.println("Browser initialized: " + browser);
         testName.set(scenario.getName());
         if(TestNGParameterStore.getParameter("screenshot-comparison").equalsIgnoreCase("false")){
             new FileUtils().deleteDirectory("resources/baselineSS/"+testName.get());

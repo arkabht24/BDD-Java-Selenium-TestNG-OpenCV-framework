@@ -24,7 +24,7 @@ public class WebDriverListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        browser = context.getCurrentXmlTest().getParameter("browser");
+        //browser = context.getCurrentXmlTest().getParameter("browser");
     }
 
     @Override
@@ -34,9 +34,6 @@ public class WebDriverListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        setDriver(WebDriverUtil.getDriver(browser));
-        System.out.println("Browser initialized: " + browser);
-
         result.getTestContext().getCurrentXmlTest().getAllParameters().forEach(TestNGParameterStore::setParameter);
 
     }
