@@ -1,5 +1,6 @@
 package com.orangehrm.stepdefinations;
 
+import com.orangehrm.hooks.ExtentReportManager;
 import com.orangehrm.listeners.WebDriverListener;
 import com.orangehrm.utils.Operation;
 import com.orangehrm.utils.WebDriverUtil;
@@ -31,16 +32,10 @@ public class PrintOperationSteps {
     @Then("I should see {string} printed on the console")
     public void i_should_see_printed_on_the_console(String expectedMessage) {
         WebDriverListener.getDriver().get("https://www.google.com");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
         new Operation(WebDriverListener.getDriver()).takeScreenshot("Google search page");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
+
+        new Operation(WebDriverListener.getDriver()).takeScreenshot("Google search page 2nd");
     }
 }

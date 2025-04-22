@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import static com.orangehrm.listeners.WebDriverListener.dirForScreenshotsCapture;
+import static com.orangehrm.listeners.WebDriverListener.listOfImagesNames;
 
 public class Operation {
     WebDriver driver = null;
@@ -41,6 +42,7 @@ public class Operation {
         try {
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             File destinationFile = new File(dir+logMessage+".png");
+            listOfImagesNames.get().add(logMessage+".png");
             Files.copy(screenshot.toPath(), destinationFile.toPath());
 
             System.out.println("Screenshot saved as "+logMessage+".png");

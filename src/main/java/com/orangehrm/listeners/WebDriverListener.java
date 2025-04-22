@@ -7,12 +7,17 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import com.orangehrm.utils.WebDriverUtil;
+import java.util.ArrayList;
+
+import java.util.List;
 
 public class WebDriverListener implements ITestListener {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static ThreadLocal<String> testName = new ThreadLocal<>();
     public static ThreadLocal <String> dirForScreenshotsCapture = new ThreadLocal<>();
+    public static ThreadLocal <List<String>> listOfImagesNames = ThreadLocal.withInitial(ArrayList::new);
+
     private String browser;
 
     public static WebDriver getDriver() {

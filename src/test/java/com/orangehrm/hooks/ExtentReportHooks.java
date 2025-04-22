@@ -2,11 +2,14 @@ package com.orangehrm.hooks;
 
 import com.aventstack.extentreports.Status;
 import com.orangehrm.listeners.TestNGParameterStore;
+import com.orangehrm.utils.ExtentScreenshotHelper;
 import com.orangehrm.utils.FileUtils;
 import com.orangehrm.utils.WebDriverUtil;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+
+import java.io.IOException;
 
 import static com.orangehrm.listeners.WebDriverListener.*;
 
@@ -40,12 +43,18 @@ public class ExtentReportHooks {
 
     @After
     public void afterScenario(Scenario scenario) {
+
+        try {
+            new ExtentScreenshotHelper().addThreeScreenshotsRow(ExtentReportManager.getTest(),listOfImagesNames.get());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         if (scenario.isFailed()) {
             ExtentReportManager.getTest().fail("Scenario Failed: " + scenario.getName());
         } else {
             ExtentReportManager.getTest().pass("Scenario Passed: " + scenario.getName());
         }
-        // Flush the report to save changes
         ExtentReportManager.getReporter().flush();
     }
 }
