@@ -1,6 +1,7 @@
 package com.orangehrm.stepdefinations;
 
 import com.orangehrm.listeners.WebDriverListener;
+import com.orangehrm.utils.Operation;
 import com.orangehrm.utils.WebDriverUtil;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -31,7 +32,13 @@ public class PrintOperationSteps {
     public void i_should_see_printed_on_the_console(String expectedMessage) {
         WebDriverListener.getDriver().get("https://www.google.com");
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        new Operation(WebDriverListener.getDriver()).takeScreenshot("Google search page");
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -8,15 +8,15 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
-import static com.orangehrm.listeners.WebDriverListener.setDriver;
-import static com.orangehrm.listeners.WebDriverListener.testName;
+import static com.orangehrm.listeners.WebDriverListener.*;
 
 
 public class ExtentReportHooks {
 
+
     @Before
     public void beforeScenario(Scenario scenario) {
-        // Start a new test for each scenario
+
         ExtentReportManager.setTest(
                 ExtentReportManager.getReporter().createTest(scenario.getName())
         );
@@ -28,10 +28,12 @@ public class ExtentReportHooks {
         if(TestNGParameterStore.getParameter("screenshot-comparison").equalsIgnoreCase("false")){
             new FileUtils().deleteDirectory("resources/baselineSS/"+testName.get());
             new FileUtils().createDirectoryIfNotExists("resources/baselineSS/"+testName.get());
+            dirForScreenshotsCapture.set("resources/baselineSS/"+testName.get()+"/");
         }
         else {
             new FileUtils().deleteDirectory("resources/temporarySS/"+testName.get());
-            new FileUtils().createDirectoryIfNotExists("resources/temporarySS"+testName.get());
+            new FileUtils().createDirectoryIfNotExists("resources/temporarySS/"+testName.get());
+            dirForScreenshotsCapture.set("resources/temporarySS/"+testName.get()+"/");
         }
 
     }

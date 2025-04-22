@@ -12,6 +12,7 @@ public class WebDriverListener implements ITestListener {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static ThreadLocal<String> testName = new ThreadLocal<>();
+    public static ThreadLocal <String> dirForScreenshotsCapture = new ThreadLocal<>();
     private String browser;
 
     public static WebDriver getDriver() {
