@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+import static com.orangehrm.listeners.WebDriverListener.comparedScreenshotDir;
 import static com.orangehrm.listeners.WebDriverListener.dirForScreenshotsCapture;
 
 public class ExtentScreenshotHelper {
@@ -48,12 +49,15 @@ public class ExtentScreenshotHelper {
                 html.append("<div style='display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px;'>");
 
                 File file1 = new File(dirForScreenshotsCapture.get().replace("temporarySS","baselineSS")+imageName);
-                String fileName1 = file1.getName();
                 String base64_1 = encodeFileToBase64(file1);
 
                 File file2 = new File(dirForScreenshotsCapture.get()+imageName);
-                String fileName2 = file2.getName();
                 String base64_2 = encodeFileToBase64(file2);
+
+                File file3 = new File(comparedScreenshotDir.get()+imageName);
+                String base64_3 = encodeFileToBase64(file3);
+
+
                 html.append("<div style='text-align: center; flex: 1 1 200px;'>")
                         .append("<img src='data:image/png;base64,")
                         .append(base64_1)
@@ -73,7 +77,7 @@ public class ExtentScreenshotHelper {
                         /*.append("<h4>").append(fileName2.replace(".png","")).append("</h4>")*/
                         .append("<div style='text-align: center; flex: 1 1 200px;'>")
                         .append("<img src='data:image/png;base64,")
-                        .append(base64_2)
+                        .append(base64_3)
                         .append("' style='width: 100%; max-width: 300px; height: auto; border:1px solid #ccc;'/>")
                         .append("</div>")
                         .append("<br>");

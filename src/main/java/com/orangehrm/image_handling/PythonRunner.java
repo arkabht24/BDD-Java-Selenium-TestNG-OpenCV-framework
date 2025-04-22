@@ -2,8 +2,14 @@ package com.orangehrm.image_handling;
 
 import java.io.*;
 
+import static com.orangehrm.listeners.WebDriverListener.comparedScreenshotDir;
+import static com.orangehrm.listeners.WebDriverListener.dirForScreenshotsCapture;
+
 public class PythonRunner {
-    public void runPythonImageComparison(String pythonScriptPath, String imagePath1, String imagePath2) {
+    public void runPythonImageComparison(String pythonScriptPath, String imageName) {
+        String imagePath1 =  dirForScreenshotsCapture.get().replace("temporarySS","baselineSS")+imageName;
+        String imagePath2 = dirForScreenshotsCapture.get()+imageName;
+        String imagePath3 = comparedScreenshotDir.get()+imageName;
         try {
 
             ProcessBuilder builder = new ProcessBuilder("python3", pythonScriptPath);
@@ -15,6 +21,8 @@ public class PythonRunner {
                 writer.write(imagePath1);
                 writer.newLine();
                 writer.write(imagePath2);
+                writer.newLine();
+                writer.write(imagePath3);
                 writer.newLine();
                 writer.flush();
             }
@@ -40,14 +48,4 @@ public class PythonRunner {
         }
     }
 
-    public static void main(String[] args) {
-        String pythonScriptPath = "src/main/python/image_compare.py";
-
-        String imagePath1 = "resources/Image1.png";
-        String imagePath2 = "resources/Image2.png";
-
-
-        new PythonRunner().runPythonImageComparison(pythonScriptPath, imagePath1, imagePath2);
-
-    }
 }

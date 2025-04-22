@@ -17,7 +17,7 @@ public class WebDriverListener implements ITestListener {
     public static ThreadLocal<String> testName = new ThreadLocal<>();
     public static ThreadLocal <String> dirForScreenshotsCapture = new ThreadLocal<>();
     public static ThreadLocal <List<String>> listOfImagesNames = ThreadLocal.withInitial(ArrayList::new);
-
+    public static ThreadLocal<String> comparedScreenshotDir = new ThreadLocal<>();
     private String browser;
 
     public static WebDriver getDriver() {
@@ -30,7 +30,6 @@ public class WebDriverListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        //browser = context.getCurrentXmlTest().getParameter("browser");
     }
 
     @Override
