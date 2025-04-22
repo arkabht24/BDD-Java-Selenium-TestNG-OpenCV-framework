@@ -41,18 +41,17 @@ public class ExtentScreenshotHelper {
         }
         else {
             StringBuilder html = new StringBuilder();
-            /*html.append("<div style='display: flex; gap: 10px; text-align: center;'>");*/
 
             for (String imageName : imageNames) {
-                html.append("<h4><center>").append(imageName.replace(".png","")).append("</center></h4>");
                 html.setLength(0);
+                html.append("<h4><center>").append(imageName.replace(".png","")).append("</center></h4>");
                 html.append("<div style='display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px;'>");
 
-                File file1 = new File(dirForScreenshotsCapture.get()+imageName);
+                File file1 = new File(dirForScreenshotsCapture.get().replace("temporarySS","baselineSS")+imageName);
                 String fileName1 = file1.getName();
                 String base64_1 = encodeFileToBase64(file1);
 
-                File file2 = new File(dirForScreenshotsCapture.get().replace("baselineSS","temporarySS")+imageName);
+                File file2 = new File(dirForScreenshotsCapture.get()+imageName);
                 String fileName2 = file2.getName();
                 String base64_2 = encodeFileToBase64(file2);
                 html.append("<div style='text-align: center; flex: 1 1 200px;'>")
